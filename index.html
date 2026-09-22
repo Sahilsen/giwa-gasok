@@ -68,6 +68,8 @@ p{margin:0}
 .kicker{font-family:var(--font-mono);font-size:16px;letter-spacing:var(--tracking-wider);text-transform:uppercase;color:var(--muted-foreground);font-weight:400}
 .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
 .semi{font-weight:600}
+/* Highlight: accent as a filled plate with accent-foreground ink (Meridian Highlight) */
+.hl{background:var(--accent);color:var(--accent-foreground);padding:0 .14em;border-radius:var(--radius-sm);box-decoration-break:clone;-webkit-box-decoration-break:clone}
 
 /* ---------- chrome ---------- */
 .topbar{display:flex;align-items:center;justify-content:space-between;height:40px}
@@ -344,7 +346,7 @@ p{margin:0}
         <div class="row"><span class="k">X</span><span class="v">@sensahil</span></div>
         <div class="row"><span class="k">Telegram</span><span class="v">@sensahill</span></div>
       </div>
-      <div class="feedback info"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Your point of contact at Quicknode for the whole GASOK program: infra questions, coupon issues, docs, co-marketing.</span></div>
+      <div class="feedback info"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Your point of contact at Quicknode for the whole GASOK program: architecture and infra decisions, go-to-market, and co-marketing.</span></div>
     </div>
   </div>
   <div class="footer"><div class="brand"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
@@ -366,7 +368,7 @@ p{margin:0}
         <div class="stat"><span class="kicker">Developer accounts</span><span class="num">700K+</span><span class="delta"><span class="dot"><svg><use href="#i-up"/></svg></span>solo founders to Fortune 500</span><span class="caption">Based on: registered accounts</span></div>
       </div>
     </div>
-    <p class="lead" style="max-width:70ch;font-size:26px">Teams don&rsquo;t run nodes or manage infra. Quicknode covers that so you spend your time on the actual product.</p>
+    <p class="lead" style="max-width:70ch;font-size:26px">Teams don&rsquo;t run nodes or manage infra. Quicknode covers that so you spend your time on <span class="hl">the actual product.</span></p>
   </div>
   <div class="footer"><div class="brand"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
   <path d="M7.02146 8.53016C4.39799 11.4765 2.87242 15.4386 2.87242 19.997C2.87242 29.5521 9.55876 36.489 19.0505 36.9369L20.0303 36.9621C20.0303 36.9621 20.0303 36.9621 20.0335 36.9621C20.0367 36.9621 20.0335 36.9621 20.0367 36.9621H40V36.4763L33.2626 32.3344C33.2626 32.3344 32.9243 32.2303 32.9083 31.8423C32.9019 31.6877 32.9498 31.5805 33.0519 31.4638C35.6722 28.5174 37.1978 24.5584 37.1978 20.0033C37.1978 10.4481 30.5114 3.51127 21.0197 3.06332L20.0303 3.03809H20.0399C20.0399 3.03809 20.0367 3.03809 20.0335 3.03809C20.0303 3.03809 20.0303 3.03809 20.0271 3.03809H0V3.52389L6.82039 7.67528C6.82039 7.67528 7.09806 7.76676 7.15551 8.08537C7.20338 8.34089 7.02146 8.53332 7.02146 8.53332M7.96298 20.0001C7.96298 12.527 12.9163 7.6595 20.0463 7.6595C27.1763 7.6595 32.1296 12.527 32.1296 20.0001C32.1296 27.4732 27.1763 32.3407 20.0463 32.3407C12.9163 32.3407 7.96298 27.4732 7.96298 20.0001Z" fill="#FFFFFF"/>
@@ -379,7 +381,7 @@ p{margin:0}
   <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
     <div style="display:flex;flex-direction:column;gap:32px">
       <h2 style="max-width:16ch">GIWA RPC, Streams and Webhooks.</h2>
-      <p class="lead" style="font-size:26px">GIWA is an Ethereum L2 on the OP Stack, so it is EVM-equivalent and your existing tooling works. Hosted RPC, a managed ETL pipeline for chain data, and onchain alerts. No node or indexer to run.</p>
+      <p class="lead" style="font-size:26px">GIWA is an Ethereum L2 on the OP Stack, so it is EVM-equivalent and your existing tooling works. Hosted RPC, a managed ETL pipeline for chain data, and onchain alerts. <span class="hl">No node or indexer to run.</span></p>
       <div class="grid" style="grid-template-columns:1fr 1fr;gap:16px">
         <div class="tile"><span class="kicker">Network</span><h4>GIWA Sepolia</h4><p>Chain ID 91342, full archive access. Mainnet endpoints follow the network launch.</p></div>
         <div class="tile"><span class="kicker">RPC</span><h4>HTTPS and WSS</h4><p>JSON-RPC, Debug and Flashblocks APIs over HTTPS. WebSocket for subscriptions.</p></div>
@@ -413,7 +415,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
 <section class="slide" data-title="Why Quicknode for GIWA">
   <div class="topbar"><p class="kicker">Why Quicknode for GIWA</p></div>
   <div style="display:flex;flex-direction:column;gap:36px;flex:1;justify-content:center">
-    <div style="display:flex;flex-direction:column;gap:22px"><h2 style="max-width:14ch">Among the first RPC providers on GIWA.</h2><p class="lead" style="font-size:26px;max-width:62ch">We are investing significant engineering effort in performance optimization for GIWA, Korea&rsquo;s Ethereum L2 by Dunamu. A few things that matter for builders:</p></div>
+    <div style="display:flex;flex-direction:column;gap:22px"><h2 style="max-width:14ch">Among the <span class="hl">first</span> RPC providers on GIWA.</h2><p class="lead" style="font-size:26px;max-width:62ch">We are investing significant engineering effort in performance optimization for GIWA, Korea&rsquo;s Ethereum L2 by Dunamu. A few things that matter for builders:</p></div>
     <div class="card">
       <div class="card-section" style="padding:24px">
         <div class="grid" style="grid-template-columns:repeat(4,1fr)">
@@ -434,11 +436,11 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
 <section class="slide" data-title="What Quicknode offers">
   <div class="topbar"><p class="kicker">What Quicknode offers GASOK teams</p></div>
   <div style="display:flex;flex-direction:column;gap:32px;flex:1;justify-content:center">
-    <div style="display:flex;flex-direction:column;gap:22px"><h2 style="max-width:16ch">Six things, open to every team.</h2><p class="lead" style="font-size:26px;max-width:62ch">Not tied to a program phase. Use what you need, when you need it.</p></div>
+    <div style="display:flex;flex-direction:column;gap:22px"><h2 style="max-width:16ch">Six things, open to <span class="hl">every team.</span></h2><p class="lead" style="font-size:26px;max-width:62ch">Not tied to a program phase. Use what you need, when you need it.</p></div>
     <div class="card">
       <div class="card-section" style="padding:24px">
         <div class="grid" style="grid-template-columns:repeat(3,1fr)">
-          <div class="tile"><div style="display:flex;justify-content:space-between;align-items:center"><span class="kicker">Infrastructure</span><span class="marker accent" style="height:28px;font-size:13px">1 year free</span></div><h4>Accelerate plan, 12 months</h4><p>~$3K value per team. 450M API credits a month, 125 requests a second, HTTP and WSS. No nodes to run.</p></div>
+          <div class="tile"><div style="display:flex;justify-content:space-between;align-items:center"><span class="kicker">Infrastructure</span><span class="marker outline" style="height:28px;font-size:13px">1 year free</span></div><h4>Accelerate plan, 12 months</h4><p>~$3K value per team. 450M API credits a month, 125 requests a second, HTTP and WSS. No nodes to run.</p></div>
           <div class="tile"><span class="kicker">Advice</span><h4>Office hours with senior Quicknode leaders</h4><p>Pricing, packaging, security and go-to-market. The stuff that is hard to figure out alone.</p></div>
           <div class="tile"><span class="kicker">Product review</span><h4>Feedback on your APIs, dev experience and docs</h4><p>From people who build and maintain developer tools at scale.</p></div>
           <div class="tile"><span class="kicker">Founder access</span><h4>A session with a Quicknode co-founder</h4><p>Product, fundraising, leadership as you grow. Not a panel, a direct conversation.</p></div>
@@ -457,9 +459,9 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
 <section class="slide" data-title="Accelerate plan">
   <div class="topbar"><p class="kicker">Accelerate plan &middot; redeem now</p></div>
   <div style="display:flex;flex-direction:column;gap:36px;flex:1;justify-content:center">
-    <div style="display:flex;flex-direction:column;gap:22px"><h2>1 year on Accelerate, free.</h2><p class="lead" style="font-size:26px;max-width:62ch">Roughly $3K of infrastructure per team. Teams don&rsquo;t need to worry about running nodes or managing infra. Quicknode covers that, so you can spend your time on the actual product.</p></div>
+    <div style="display:flex;flex-direction:column;gap:22px"><h2>1 year on Accelerate, <span class="hl">free.</span></h2><p class="lead" style="font-size:26px;max-width:62ch">Roughly $3K of infrastructure per team. Teams don&rsquo;t need to worry about running nodes or managing infra. Quicknode covers that, so you can spend your time on the actual product.</p></div>
     <div class="card">
-      <div class="card-header"><span class="title">Accelerate plan</span><span class="marker accent">Free for 12 months</span></div>
+      <div class="card-header"><span class="title">Accelerate plan</span><span class="marker outline">Free for 12 months</span></div>
       <div class="stats" style="grid-template-columns:repeat(3,1fr)">
         <div class="stat"><span class="kicker">RPC API credits</span><span class="num">450M</span><span class="delta"><span class="dot"><svg><use href="#i-check"/></svg></span>per month</span><span class="caption">Method-weighted: simple reads cost less, heavy calls cost more</span></div>
         <div class="stat"><span class="kicker">Throughput</span><span class="num">125<small> rps</small></span><span class="delta"><span class="dot"><svg><use href="#i-check"/></svg></span>requests per second</span><span class="caption">Headroom for a testnet MVP and an early mainnet launch</span></div>
@@ -477,7 +479,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
   <div class="topbar"><p class="kicker">Office hours &middot; Co-founder session</p></div>
   <div style="flex:1;display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center">
     <div style="display:flex;flex-direction:column;gap:32px">
-      <h2 style="max-width:14ch">The stuff that&rsquo;s hard to figure out alone.</h2>
+      <h2 style="max-width:14ch">The stuff that&rsquo;s hard to figure out <span class="hl">alone.</span></h2>
       <div style="display:flex;flex-direction:column;gap:16px">
         <div class="tile"><span class="kicker">Advice</span><h4>Office hours with senior Quicknode leaders</h4><p>Pricing, packaging, security and go-to-market. Plus feedback on your APIs, dev experience and docs from people who build and maintain developer tools at scale.</p></div>
         <div class="tile"><span class="kicker">Founder access</span><h4>A session with a Quicknode co-founder</h4><p>Bring whatever you&rsquo;re working through. Honest advice from someone who built a company from scratch to serving Fortune 500 clients and major protocols. Not a panel, just a direct conversation.</p></div>
@@ -507,7 +509,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
 <section class="slide" data-title="Growth">
   <div class="topbar"><p class="kicker">Co-marketing &middot; Distribution</p></div>
   <div style="display:flex;flex-direction:column;gap:36px;flex:1;justify-content:center">
-    <div style="display:flex;flex-direction:column;gap:22px"><h2>Your product. Your story. Our distribution.</h2><p class="lead" style="font-size:26px;max-width:62ch">Once you&rsquo;re on mainnet, we help you get in front of people who might actually become your customers.</p></div>
+    <div style="display:flex;flex-direction:column;gap:22px"><h2>Your product. Your story. <span class="hl">Our distribution.</span></h2><p class="lead" style="font-size:26px;max-width:62ch">Once you&rsquo;re on mainnet, we help you get in front of people who might actually become your customers.</p></div>
     <div class="card">
       <div class="card-section" style="padding:24px">
         <div class="grid" style="grid-template-columns:1fr 1fr">
@@ -553,7 +555,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
   </div>
   <div style="flex:1;display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center">
     <div style="display:flex;flex-direction:column;gap:40px">
-      <h1 style="font-size:112px">Build on GIWA.<br>Run on Quicknode.</h1>
+      <h1 style="font-size:112px">Build on GIWA.<br>Run on <span class="hl">Quicknode.</span></h1>
       <div class="contact" style="gap:14px">
         <div class="row"><span class="k" style="width:170px">Claim your year</span><span class="v mono" style="font-size:24px">quiknode.typeform.com/gasok</span></div>
         <div class="row"><span class="k" style="width:170px">GIWA docs</span><span class="v mono" style="font-size:24px">quicknode.com/docs/giwa</span></div>
