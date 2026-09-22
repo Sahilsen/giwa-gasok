@@ -247,6 +247,15 @@ p{margin:0}
 #gfoot .right{display:flex;align-items:center;gap:20px}
 #gfoot #nav{position:static;pointer-events:auto}
 
+/* ---------- CardIllustrationFrame (Meridian Patterns/Marketing): purple theme frame, window chrome, 1-bit illustration ---------- */
+.illo-frame{background:oklch(57.1% .218219 290);padding:44px;display:block}
+.illo-window{background:oklch(28.9% 0 0);border:1px solid #fff;color:#fff}
+.illo-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 12px}
+.illo-bar .x{width:26px;height:26px;border:1px solid #fff;display:grid;place-items:center;font:14px var(--font-mono)}
+.illo-bar .label{font-family:var(--font-mono);font-size:15px;letter-spacing:var(--tracking-wider);text-transform:uppercase}
+.illo-hatch{margin:0 12px 12px;padding:7px;background:repeating-linear-gradient(-45deg,#fff 0 1.4px,transparent 1.4px 6px);border:1px solid #fff}
+.illo-hatch canvas{display:block;width:100%;height:auto;background:oklch(28.9% 0 0);image-rendering:pixelated;image-rendering:crisp-edges;outline:1px solid #fff}
+
 /* ---------- nav ---------- */
 #nav{display:flex;gap:8px}
 #nav button{appearance:none;background:var(--card);border:1px solid var(--border);color:var(--foreground);width:40px;height:40px;border-radius:var(--radius-md);font:18px var(--font-mono);cursor:pointer;box-shadow:var(--shadow-1)}
@@ -485,27 +494,11 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
         <div class="tile"><span class="kicker">Founder access</span><h4>A session with a Quicknode co-founder</h4><p>Honest advice from someone who built Quicknode from scratch to serving Fortune 500 clients and major protocols.</p></div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-header"><span class="title">Working sessions</span><span class="kicker">1:1 with your team</span></div>
-      <div class="card-section" style="display:flex;flex-direction:column;gap:14px">
-        <span class="kicker">Office hours &middot; senior Quicknode leaders</span>
-        <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px 24px">
-          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Pricing and packaging</span></div>
-          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Security review</span></div>
-          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Go-to-market</span></div>
-          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>API, dev experience and docs</span></div>
-        </div>
+    <div class="illo-frame">
+      <div class="illo-window">
+        <div class="illo-bar"><span class="x">&times;</span><span class="label">Sessions</span></div>
+        <div class="illo-hatch"><canvas class="metaframe" width="176" height="112" aria-hidden="true"></canvas></div>
       </div>
-      <div class="card-section" style="display:flex;flex-direction:column;gap:14px">
-        <span class="kicker">Co-founder session &middot; direct conversation</span>
-        <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px 24px">
-          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Product questions</span></div>
-          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Fundraising</span></div>
-          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Leadership as you grow</span></div>
-          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Whatever you are working through</span></div>
-        </div>
-      </div>
-      <div class="card-section" style="padding:20px 36px"><span class="kicker">Not a panel. Scheduled per team, on request.</span></div>
     </div>
   </div>
   <div class="footer"><div class="brand"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
@@ -705,6 +698,28 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
     }
     frame(t0);
   }
+  var frameRaf=null;
+  function metaFrame(canvas){
+    if(frameRaf){cancelAnimationFrame(frameRaf);frameRaf=null;}
+    if(!canvas) return;
+    var ctx=canvas.getContext('2d'), W=canvas.width, H=canvas.height, img=ctx.createImageData(W,H), d=img.data, t0=performance.now();
+    /* four blobs in a row: they swell, drift and merge, then separate, one bit, no anti-aliasing */
+    var balls=[{x:.20,y:.5,r:.105,ph:0},{x:.42,y:.5,r:.085,ph:1.6},{x:.62,y:.5,r:.07,ph:3.1},{x:.80,y:.5,r:.055,ph:4.7}];
+    function frame(ts){
+      var s=(ts-t0)/1000;
+      for(var y=0;y<H;y++){for(var x=0;x<W;x++){
+        var fx=x/W, fy=y/H*(H/W), sum=0;
+        for(var k=0;k<balls.length;k++){
+          var b=balls[k], bx=b.x+Math.sin(s*0.7+b.ph)*0.045, by=(0.5*(H/W))+Math.cos(s*0.9+b.ph)*0.05, br=b.r*(1+0.22*Math.sin(s*1.1+b.ph));
+          var dx=fx-bx, dy=fy-by; sum+=(br*br)/(dx*dx+dy*dy+1e-6);
+        }
+        var on=sum>1.0, i=(y*W+x)*4; d[i]=d[i+1]=d[i+2]=on?255:43; d[i+3]=255;
+      }}
+      ctx.putImageData(img,0,0);
+      if(!reduce) frameRaf=requestAnimationFrame(frame);
+    }
+    frame(t0);
+  }
   function show(n){
     if(dialogOpen){ if(n<i) closeDialog(); return; }
     if(n>slides.length-1){ if(i===slides.length-1) openDialog(); return; }
@@ -712,6 +727,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
     slides.forEach(function(s,k){s.classList.toggle('active',k===i); s.classList.remove('in');});
     var s=slides[i]; void s.offsetWidth;
     textureWave(s.querySelector('.texture'));
+    metaFrame(s.querySelector('.metaframe'));
     if(!reduce){
       s.classList.add('in');
       try{
