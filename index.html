@@ -256,6 +256,25 @@ p{margin:0}
 .illo-hatch{margin:0 12px 12px;padding:7px;background:repeating-linear-gradient(-45deg,#fff 0 1.4px,transparent 1.4px 6px);border:1px solid #fff}
 .illo-hatch canvas{display:block;width:100%;height:auto;background:oklch(28.9% 0 0);image-rendering:pixelated;image-rendering:crisp-edges;outline:1px solid #fff}
 
+/* ---------- Call view inside the illustration frame: 1-bit, white on gray-900 ---------- */
+.call{background:oklch(28.9% 0 0);outline:1px solid #fff;color:#fff;display:grid;grid-template-rows:1fr auto;aspect-ratio:176/112}
+.call-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px}
+.pt{position:relative;border:1px solid #fff;display:grid;place-items:center;overflow:hidden}
+.pt.speaking{box-shadow:inset 0 0 0 2px #fff}
+.pt canvas{width:128px;height:128px;image-rendering:pixelated;image-rendering:crisp-edges;display:block}
+.pt .tag{position:absolute;left:8px;bottom:8px;display:flex;align-items:center;gap:8px;padding:4px 8px;border:1px solid #fff;font:12px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;background:oklch(28.9% 0 0)}
+.pt .tag .mic{width:10px;height:10px;border:1px solid #fff;border-radius:999px}
+.pt .tag .mic.off{background:#fff}
+.pt .bars{position:absolute;right:10px;top:10px;display:flex;gap:3px;align-items:flex-end;height:16px}
+.pt .bars i{width:3px;background:#fff;height:6px;animation:qn-bars .9s var(--motion-ease-in-out) infinite}
+.pt .bars i:nth-child(2){animation-delay:.15s}.pt .bars i:nth-child(3){animation-delay:.3s}.pt .bars i:nth-child(4){animation-delay:.45s}
+@keyframes qn-bars{0%,100%{height:5px}50%{height:16px}}
+.call-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-top:1px solid #fff;font:12px var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
+.call-bar .btns{display:flex;gap:6px}
+.call-bar .btns span{border:1px solid #fff;padding:4px 8px}
+.call-bar .btns span.on{background:#fff;color:oklch(28.9% 0 0)}
+@media (prefers-reduced-motion:reduce){.pt .bars i{animation:none;height:9px}}
+
 /* ---------- nav ---------- */
 #nav{display:flex;gap:8px}
 #nav button{appearance:none;background:var(--card);border:1px solid var(--border);color:var(--foreground);width:40px;height:40px;border-radius:var(--radius-md);font:18px var(--font-mono);cursor:pointer;box-shadow:var(--shadow-1)}
@@ -496,8 +515,18 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
     </div>
     <div class="illo-frame">
       <div class="illo-window">
-        <div class="illo-bar"><span class="x">&times;</span><span class="label">Sessions</span></div>
-        <div class="illo-hatch"><canvas class="metaframe" width="176" height="112" aria-hidden="true"></canvas></div>
+        <div class="illo-bar"><span class="x">&times;</span><span class="label">Session &middot; 1:1</span></div>
+        <div class="illo-hatch">
+          <div class="call" aria-hidden="true">
+            <div class="call-grid">
+              <div class="pt speaking"><canvas class="av" data-kind="sil" data-seed="1" width="64" height="64"></canvas><span class="bars"><i></i><i></i><i></i><i></i></span><span class="tag"><span class="mic"></span>Quicknode co-founder</span></div>
+              <div class="pt"><canvas class="av" data-kind="photo" width="64" height="64"></canvas><span class="tag"><span class="mic"></span>Sahil Sen</span></div>
+              <div class="pt"><canvas class="av" data-kind="sil" data-seed="2" width="64" height="64"></canvas><span class="tag"><span class="mic"></span>Founder &middot; your team</span></div>
+              <div class="pt"><canvas class="av" data-kind="sil" data-seed="3" width="64" height="64"></canvas><span class="tag"><span class="mic off"></span>CTO &middot; your team</span></div>
+            </div>
+            <div class="call-bar"><span>Office hours &middot; <span class="timer">00:00:00</span></span><span class="btns"><span class="on">Mic</span><span class="on">Cam</span><span>Share</span><span>Leave</span></span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -698,27 +727,36 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
     }
     frame(t0);
   }
-  var frameRaf=null;
-  function metaFrame(canvas){
+  var frameRaf=null, avatarsDone=false;
+  var BAYER=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
+  function paint1bit(canvas,gray){ /* gray: function(x,y)->0..1 ; ordered dither to white / gray-900 */
+    var ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height,img=ctx.createImageData(W,H),d=img.data;
+    for(var y=0;y<H;y++)for(var x=0;x<W;x++){var g=gray(x,y),th=(BAYER[y%4][x%4]+0.5)/16,on=g>th,i=(y*W+x)*4;d[i]=d[i+1]=d[i+2]=on?255:43;d[i+3]=255;}
+    ctx.putImageData(img,0,0);
+  }
+  function silhouette(canvas,seed){
+    var W=canvas.width,H=canvas.height,hr=W*(0.19+0.02*seed),hx=W/2,hy=H*0.40,sw=W*(0.34+0.03*seed);
+    paint1bit(canvas,function(x,y){
+      var dx=x-hx,dy=y-hy; if(dx*dx+dy*dy<hr*hr) return 0.85;                 /* head */
+      var sy=H*0.72, ex=(x-hx)/sw, ey=(y-sy)/(H*0.30); if(y>H*0.66&&ex*ex+ey*ey<1) return 0.85; /* shoulders */
+      return 0.04;                                                              /* clean ground */
+    });
+  }
+  function photo1bit(canvas){
+    var src=document.querySelector('.headshot'); if(!src) return silhouette(canvas,1);
+    var im=new Image(); im.onload=function(){
+      var W=canvas.width,H=canvas.height,tmp=document.createElement('canvas');tmp.width=W;tmp.height=H;
+      var c=tmp.getContext('2d');c.drawImage(im,0,0,W,H);var px=c.getImageData(0,0,W,H).data;
+      paint1bit(canvas,function(x,y){var i=(y*W+x)*4;var g=(px[i]*0.299+px[i+1]*0.587+px[i+2]*0.114)/255;return Math.min(1,Math.max(0,(g-0.30)*1.9));});
+    }; im.src=src.getAttribute('src');
+  }
+  function callFrame(root){
     if(frameRaf){cancelAnimationFrame(frameRaf);frameRaf=null;}
-    if(!canvas) return;
-    var ctx=canvas.getContext('2d'), W=canvas.width, H=canvas.height, img=ctx.createImageData(W,H), d=img.data, t0=performance.now();
-    /* four blobs in a row: they swell, drift and merge, then separate, one bit, no anti-aliasing */
-    var balls=[{x:.20,y:.5,r:.105,ph:0},{x:.42,y:.5,r:.085,ph:1.6},{x:.62,y:.5,r:.07,ph:3.1},{x:.80,y:.5,r:.055,ph:4.7}];
-    function frame(ts){
-      var s=(ts-t0)/1000;
-      for(var y=0;y<H;y++){for(var x=0;x<W;x++){
-        var fx=x/W, fy=y/H*(H/W), sum=0;
-        for(var k=0;k<balls.length;k++){
-          var b=balls[k], bx=b.x+Math.sin(s*0.7+b.ph)*0.045, by=(0.5*(H/W))+Math.cos(s*0.9+b.ph)*0.05, br=b.r*(1+0.22*Math.sin(s*1.1+b.ph));
-          var dx=fx-bx, dy=fy-by; sum+=(br*br)/(dx*dx+dy*dy+1e-6);
-        }
-        var on=sum>1.0, i=(y*W+x)*4; d[i]=d[i+1]=d[i+2]=on?255:43; d[i+3]=255;
-      }}
-      ctx.putImageData(img,0,0);
-      if(!reduce) frameRaf=requestAnimationFrame(frame);
-    }
-    frame(t0);
+    if(!root) return;
+    if(!avatarsDone){ root.querySelectorAll('canvas.av').forEach(function(cv){ cv.dataset.kind==='photo'?photo1bit(cv):silhouette(cv,parseInt(cv.dataset.seed,10)||1); }); avatarsDone=true; }
+    var timer=root.querySelector('.timer'), t0=performance.now(), base=41*60+52;   /* the call has been going a while */
+    function tick(ts){ var s=base+Math.floor((ts-t0)/1000); timer.textContent=pad(Math.floor(s/3600))+':'+pad(Math.floor(s/60)%60)+':'+pad(s%60); if(!reduce) frameRaf=requestAnimationFrame(tick); }
+    tick(t0);
   }
   function show(n){
     if(dialogOpen){ if(n<i) closeDialog(); return; }
@@ -727,7 +765,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
     slides.forEach(function(s,k){s.classList.toggle('active',k===i); s.classList.remove('in');});
     var s=slides[i]; void s.offsetWidth;
     textureWave(s.querySelector('.texture'));
-    metaFrame(s.querySelector('.metaframe'));
+    callFrame(s.querySelector('.call'));
     if(!reduce){
       s.classList.add('in');
       try{
