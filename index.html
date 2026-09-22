@@ -57,7 +57,7 @@ body{margin:0;background:var(--background);color:var(--foreground);font-family:v
 .slide.active{display:flex}
 
 /* ---------- type: h1-h6 inherit font-display + tracking-display per Meridian base layer ---------- */
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;letter-spacing:var(--tracking-display);margin:0;text-wrap:balance;line-height:1}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;letter-spacing:var(--tracking-display);margin:0;text-wrap:balance;line-height:1.08}
 h1{font-size:120px}
 h2{font-size:84px}
 h3{font-size:40px;line-height:1.06}
@@ -69,7 +69,7 @@ p{margin:0}
 .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
 .semi{font-weight:600}
 /* Highlight: accent as a filled plate with accent-foreground ink (Meridian Highlight) */
-.hl{background:var(--accent);color:var(--accent-foreground);padding:0 .14em;border-radius:var(--radius-sm);box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hl{background:var(--accent);color:var(--accent-foreground)}
 
 /* ---------- chrome ---------- */
 .topbar{display:flex;align-items:center;justify-content:space-between;height:40px}
@@ -445,7 +445,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
           <div class="tile"><span class="kicker">Product review</span><h4>Feedback on your APIs, dev experience and docs</h4><p>From people who build and maintain developer tools at scale.</p></div>
           <div class="tile"><span class="kicker">Founder access</span><h4>A session with a Quicknode co-founder</h4><p>Product, fundraising, leadership as you grow. Not a panel, a direct conversation.</p></div>
           <div class="tile"><span class="kicker">Co-marketing</span><h4>Guides, videos and case studies</h4><p>Co-published with your team once you are live, pushed through Quicknode&rsquo;s channels.</p></div>
-          <div class="tile"><span class="kicker">Distribution</span><h4>Quicknode&rsquo;s builder and enterprise network</h4><p>Your product in front of teams building across 80+ chains. People who might actually become your customers.</p></div>
+          <div class="tile"><span class="kicker">Distribution</span><h4>Listed in Quicknode&rsquo;s Builder&rsquo;s Guide</h4><p>The directory developers use to pick their stack, organized by project type. Your product in front of people deciding what to build with.</p></div>
         </div>
       </div>
     </div>
@@ -459,7 +459,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
 <section class="slide" data-title="Accelerate plan">
   <div class="topbar"><p class="kicker">Accelerate plan &middot; redeem now</p></div>
   <div style="display:flex;flex-direction:column;gap:36px;flex:1;justify-content:center">
-    <div style="display:flex;flex-direction:column;gap:22px"><h2>1 year on Accelerate, <span class="hl">free.</span></h2><p class="lead" style="font-size:26px;max-width:62ch">Roughly $3K of infrastructure per team. Teams don&rsquo;t need to worry about running nodes or managing infra. Quicknode covers that, so you can spend your time on the actual product.</p></div>
+    <div style="display:flex;flex-direction:column;gap:22px"><h2>1 year of Accelerate, <span class="hl">free.</span></h2><p class="lead" style="font-size:26px;max-width:62ch">Roughly $3K of infrastructure per team. Teams don&rsquo;t need to worry about running nodes or managing infra. Quicknode covers that, so you can spend your time on the actual product.</p></div>
     <div class="card">
       <div class="card-header"><span class="title">Accelerate plan</span><span class="marker outline">Free for 12 months</span></div>
       <div class="stats" style="grid-template-columns:repeat(3,1fr)">
@@ -481,23 +481,31 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
     <div style="display:flex;flex-direction:column;gap:32px">
       <h2 style="max-width:14ch">The stuff that&rsquo;s hard to figure out <span class="hl">alone.</span></h2>
       <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="tile"><span class="kicker">Advice</span><h4>Office hours with senior Quicknode leaders</h4><p>Pricing, packaging, security and go-to-market. Plus feedback on your APIs, dev experience and docs from people who build and maintain developer tools at scale.</p></div>
-        <div class="tile"><span class="kicker">Founder access</span><h4>A session with a Quicknode co-founder</h4><p>Bring whatever you&rsquo;re working through. Honest advice from someone who built a company from scratch to serving Fortune 500 clients and major protocols. Not a panel, just a direct conversation.</p></div>
+        <div class="tile"><span class="kicker">Advice</span><h4>Office hours with senior Quicknode leaders</h4><p>Working sessions on the decisions that are hard to make alone, with people who build and run developer tools at scale.</p></div>
+        <div class="tile"><span class="kicker">Founder access</span><h4>A session with a Quicknode co-founder</h4><p>Honest advice from someone who built Quicknode from scratch to serving Fortune 500 clients and major protocols.</p></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-header"><span class="title">Co-founder session</span><span class="kicker">1:1 &middot; illustrative</span></div>
-      <div class="thread">
-        <div class="msg"><span class="avatar">T</span><div><div class="bubble">We have two pricing models on the table and can&rsquo;t pick. Usage-based feels right but every advisor says seats.</div><div class="meta">Team &middot; 10:12</div></div></div>
-        <div class="msg out"><span class="avatar q"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
-  <path d="M7.02146 8.53016C4.39799 11.4765 2.87242 15.4386 2.87242 19.997C2.87242 29.5521 9.55876 36.489 19.0505 36.9369L20.0303 36.9621C20.0303 36.9621 20.0303 36.9621 20.0335 36.9621C20.0367 36.9621 20.0335 36.9621 20.0367 36.9621H40V36.4763L33.2626 32.3344C33.2626 32.3344 32.9243 32.2303 32.9083 31.8423C32.9019 31.6877 32.9498 31.5805 33.0519 31.4638C35.6722 28.5174 37.1978 24.5584 37.1978 20.0033C37.1978 10.4481 30.5114 3.51127 21.0197 3.06332L20.0303 3.03809H20.0399C20.0399 3.03809 20.0367 3.03809 20.0335 3.03809C20.0303 3.03809 20.0303 3.03809 20.0271 3.03809H0V3.52389L6.82039 7.67528C6.82039 7.67528 7.09806 7.76676 7.15551 8.08537C7.20338 8.34089 7.02146 8.53332 7.02146 8.53332M7.96298 20.0001C7.96298 12.527 12.9163 7.6595 20.0463 7.6595C27.1763 7.6595 32.1296 12.527 32.1296 20.0001C32.1296 27.4732 27.1763 32.3407 20.0463 32.3407C12.9163 32.3407 7.96298 27.4732 7.96298 20.0001Z" fill="#FFFFFF"/>
-</svg></span><div><div class="bubble">Who pays the invoice at your best customer today, and what do they already measure? Price the thing they already count.</div><div class="meta">Quicknode co-founder &middot; 10:14</div></div></div>
-        <div class="msg"><span class="avatar">T</span><div><div class="bubble">Their ops lead. They track transactions settled per day.</div><div class="meta">Team &middot; 10:15</div></div></div>
-        <div class="msg out"><span class="avatar q"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
-  <path d="M7.02146 8.53016C4.39799 11.4765 2.87242 15.4386 2.87242 19.997C2.87242 29.5521 9.55876 36.489 19.0505 36.9369L20.0303 36.9621C20.0303 36.9621 20.0303 36.9621 20.0335 36.9621C20.0367 36.9621 20.0335 36.9621 20.0367 36.9621H40V36.4763L33.2626 32.3344C33.2626 32.3344 32.9243 32.2303 32.9083 31.8423C32.9019 31.6877 32.9498 31.5805 33.0519 31.4638C35.6722 28.5174 37.1978 24.5584 37.1978 20.0033C37.1978 10.4481 30.5114 3.51127 21.0197 3.06332L20.0303 3.03809H20.0399C20.0399 3.03809 20.0367 3.03809 20.0335 3.03809C20.0303 3.03809 20.0303 3.03809 20.0271 3.03809H0V3.52389L6.82039 7.67528C6.82039 7.67528 7.09806 7.76676 7.15551 8.08537C7.20338 8.34089 7.02146 8.53332 7.02146 8.53332M7.96298 20.0001C7.96298 12.527 12.9163 7.6595 20.0463 7.6595C27.1763 7.6595 32.1296 12.527 32.1296 20.0001C32.1296 27.4732 27.1763 32.3407 20.0463 32.3407C12.9163 32.3407 7.96298 27.4732 7.96298 20.0001Z" fill="#FFFFFF"/>
-</svg></span><div><div class="bubble">Then that&rsquo;s your unit. Now let&rsquo;s talk about the fundraising timeline around KBW.</div><div class="meta">Quicknode co-founder &middot; 10:16</div></div></div>
-        <div class="thinking"><span class="dots"><i></i><i></i><i></i></span>Illustrative conversation</div>
+      <div class="card-header"><span class="title">Working sessions</span><span class="kicker">1:1 with your team</span></div>
+      <div class="card-section" style="display:flex;flex-direction:column;gap:14px">
+        <span class="kicker">Office hours &middot; senior Quicknode leaders</span>
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px 24px">
+          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Pricing and packaging</span></div>
+          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Security review</span></div>
+          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Go-to-market</span></div>
+          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>API, dev experience and docs</span></div>
+        </div>
       </div>
+      <div class="card-section" style="display:flex;flex-direction:column;gap:14px">
+        <span class="kicker">Co-founder session &middot; direct conversation</span>
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px 24px">
+          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Product questions</span></div>
+          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Fundraising</span></div>
+          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Leadership as you grow</span></div>
+          <div class="feedback info" style="font-size:19px;padding:12px 14px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Whatever you are working through</span></div>
+        </div>
+      </div>
+      <div class="card-section" style="padding:20px 36px"><span class="kicker">Not a panel. Scheduled per team, on request.</span></div>
     </div>
   </div>
   <div class="footer"><div class="brand"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
@@ -514,7 +522,7 @@ wscat -c wss://&lt;your-endpoint&gt;.quiknode.pro/&lt;token&gt;/
       <div class="card-section" style="padding:24px">
         <div class="grid" style="grid-template-columns:1fr 1fr">
           <div class="tile" style="padding:36px"><span class="kicker">Co-publish</span><h4>Guides, videos and case studies</h4><p>Written and produced with your team, then pushed through Quicknode&rsquo;s blog, docs, YouTube, newsletter and social channels.</p></div>
-          <div class="tile" style="padding:36px"><span class="kicker">Distribute</span><h4>Quicknode&rsquo;s builder and enterprise network</h4><p>Your product in front of developers and enterprises building across 80+ chains. Real distribution, not a logo on a partners page.</p></div>
+          <div class="tile" style="padding:36px"><span class="kicker">Builder&rsquo;s Guide</span><h4>Listed in Quicknode&rsquo;s Builder&rsquo;s Guide</h4><p>Quicknode&rsquo;s directory of the tools and providers web3 teams use to pick their stack, organized by project type. Your product in front of developers deciding what to build with.</p></div>
         </div>
       </div>
       <div class="card-section" style="padding:20px 36px"><div class="feedback success" style="font-size:20px"><span class="ic"><svg><use href="#i-check"/></svg></span><span>Co-marketing starts once you are live on mainnet. Tell us your launch date early so content is ready on day one.</span></div></div>
